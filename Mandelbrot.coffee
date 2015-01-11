@@ -17,10 +17,13 @@ Mandeliter = (cx, cy, maxiter) ->
 
 
 Mandelbrot = (width, height, xmin, xmax, ymin, ymax, iterations) ->
-	canvas = document.createElement 'canvas'
-	canvas.width = width
-	canvas.height = height
-
+	canvas = document.getElementById 'fractalCanvas'
+	if not canvas
+		canvas = document.createElement 'canvas'
+		canvas.id = 'fractalCanvas'
+		canvas.width = width
+		canvas.height = height
+		
 	ctx = canvas.getContext '2d'
 	img = ctx.getImageData 0, 0, width, height
 	pix = img.data
@@ -56,3 +59,5 @@ Mandelbrot = (width, height, xmin, xmax, ymin, ymax, iterations) ->
 	document.body.insertBefore canvas, document.body.childNodes[0]
 
 Mandelbrot 900, 600, -2, 1, -1, 1, 1000
+
+exports.calculateMandlebrot = Mandelbrot
